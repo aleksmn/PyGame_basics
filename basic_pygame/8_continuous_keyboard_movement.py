@@ -7,18 +7,23 @@ pygame.init()
 WINDOW_WIDTH = 600
 WINDOW_HIGHT = 300
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HIGHT))
-pygame.display.set_caption('Mouse Movement!')
+pygame.display.set_caption('Continuous Movement!')
+
+# Set FPS and clock
+FPS = 60
+clock = pygame.time.Clock()
+
 
 # Define colors
 BLACK = (0, 0, 0)
 
 # Set game values
-VELOCITY = 10
+VELOCITY = 5
 
 # Load in images
 dragon_image = pygame.image.load("images/dragon_right.png")
 dragon_rect = dragon_image.get_rect()
-dragon_rect.topleft = (25, 25)
+dragon_rect.center = (WINDOW_WIDTH//2, WINDOW_HIGHT//2)
 
 
 # The main game loop
@@ -29,21 +34,18 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        # Move based on mouse clicks
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            print(event)
-            mouse_x = event.pos[0]
-            mouse_y = event.pos[1]
-            dragon_rect.centerx = mouse_x
-            dragon_rect.centery = mouse_y
+    # Get a list of all keys pressed down
+    keys = pygame.key.get_pressed()
 
-        # Drag the object when the mouse button is clicked
-        if event.type == pygame.MOUSEMOTION and event.buttons[0] == 1:
-            print(event)
-            mouse_x = event.pos[0]
-            mouse_y = event.pos[1]
-            dragon_rect.centerx = mouse_x
-            dragon_rect.centery = mouse_y
+    # Move the dragon continuously
+    if keys[pygame.K_LEFT]:
+        dragon_rect.x -= VELOCITY
+    if keys[pygame.K_RIGHT]:
+        dragon_rect.x += VELOCITY
+    if keys[pygame.K_DOWN]:
+        dragon_rect.y += VELOCITY
+    if keys[pygame.K_UP]:
+        dragon_rect.y -= VELOCITY
 
 
     # Fill display to cover old images
@@ -54,6 +56,9 @@ while running:
  
     # Update the display
     pygame.display.update()
+
+    # Tick the clock
+    clock.tick(FPS)
 
 # End the game
 pygame.quit()
