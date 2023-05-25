@@ -40,7 +40,6 @@ pygame.draw.rect(display_surface, RED, (WINDOW_WIDTH-200, 100, 100, 100))
 # The main game loop
 running = True
 while running:
-    # Loop through a list of Event
     for event in pygame.event.get():
         print(event)
 
