@@ -1,20 +1,20 @@
 import pygame
 
-# Initialize pygame
+# Инициализация (запуск) 
 pygame.init()
 
-# Create dispaly surface and set its caption
+# Display surface
 WINDOW_WIDTH = 600
 WINDOW_HEIGHT = 300
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Hello world")
 
-# The main game loop
 
+# Игровой цикл
 
 running = True
 while running:
-    # Loop through a list of Event
+    # перебираем события
     for event in pygame.event.get():
         print(event)
 
